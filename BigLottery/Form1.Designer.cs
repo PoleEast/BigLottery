@@ -52,9 +52,9 @@
             button2 = new Button();
             plBet = new Panel();
             plWinner = new Panel();
+            lbWinnerNum = new Label();
             btnWinnerNum = new Button();
             lbWinnerDraw = new Label();
-            lbWinnerNum = new Label();
             plBet.SuspendLayout();
             plWinner.SuspendLayout();
             SuspendLayout();
@@ -286,6 +286,16 @@
             plWinner.Size = new Size(452, 466);
             plWinner.TabIndex = 26;
             // 
+            // lbWinnerNum
+            // 
+            lbWinnerNum.AutoSize = true;
+            lbWinnerNum.Font = new Font("Microsoft JhengHei UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 136);
+            lbWinnerNum.Location = new Point(15, 98);
+            lbWinnerNum.Name = "lbWinnerNum";
+            lbWinnerNum.Size = new Size(130, 35);
+            lbWinnerNum.TabIndex = 24;
+            lbWinnerNum.Text = "開獎期號:\r\n";
+            // 
             // btnWinnerNum
             // 
             btnWinnerNum.Location = new Point(371, 36);
@@ -305,16 +315,6 @@
             lbWinnerDraw.Size = new Size(130, 35);
             lbWinnerDraw.TabIndex = 6;
             lbWinnerDraw.Text = "開獎期號:";
-            // 
-            // lbWinnerNum
-            // 
-            lbWinnerNum.AutoSize = true;
-            lbWinnerNum.Font = new Font("Microsoft JhengHei UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 136);
-            lbWinnerNum.Location = new Point(15, 98);
-            lbWinnerNum.Name = "lbWinnerNum";
-            lbWinnerNum.Size = new Size(130, 35);
-            lbWinnerNum.TabIndex = 24;
-            lbWinnerNum.Text = "開獎期號:";
             // 
             // Form1
             // 

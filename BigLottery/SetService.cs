@@ -10,7 +10,7 @@ namespace BigLottery
 {
     internal class SetService
     {
-        public static BetSlip? CheckSet(string userName, string inputNumbers)
+        public static BetSlip? CheckSet(string userName, string inputNumbers, int todayOrder)
         {
             inputNumbers = inputNumbers.Trim();
             List<int> numbers = new List<int>();
@@ -38,8 +38,11 @@ namespace BigLottery
                 MessageBox.Show("請勿輸入重複號碼");
                 return null;
             }
+            //檢測是否為1~49
 
-            BetSlip betSlip = new(userName, numbers);
+
+
+            BetSlip betSlip = new(userName, numbers, todayOrder);
             return betSlip;
         }
     }

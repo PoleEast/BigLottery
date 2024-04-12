@@ -13,7 +13,7 @@ namespace BigLottery
         private List<int> _numbers;
         private DateTime _data = DateTime.Now;
         private int _orderNumber = int.Parse(DateTime.Now.ToString("yyyyMMddHH"));
-        private int _draw = int.Parse(DateTime.Now.ToString("yyyy"));
+        private int _draw = int.Parse(DateTime.Now.ToString("yyyyMMdd"));
 
         public string UserName { get { return _username; } }
         public List<int> Number { get { return _numbers; } }

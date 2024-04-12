@@ -49,11 +49,19 @@
             comboBox4 = new ComboBox();
             comboBox5 = new ComboBox();
             timer = new System.Windows.Forms.Timer(components);
+            button2 = new Button();
+            plBet = new Panel();
+            plWinner = new Panel();
+            btnWinnerNum = new Button();
+            lbWinnerDraw = new Label();
+            lbWinnerNum = new Label();
+            plBet.SuspendLayout();
+            plWinner.SuspendLayout();
             SuspendLayout();
             // 
             // btnBet
             // 
-            btnBet.Location = new Point(649, 97);
+            btnBet.Location = new Point(548, 36);
             btnBet.Name = "btnBet";
             btnBet.Size = new Size(76, 38);
             btnBet.TabIndex = 0;
@@ -65,7 +73,7 @@
             // 
             lbInput.AutoSize = true;
             lbInput.Font = new Font("Microsoft JhengHei UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 136);
-            lbInput.Location = new Point(46, 97);
+            lbInput.Location = new Point(36, 39);
             lbInput.Name = "lbInput";
             lbInput.Size = new Size(76, 35);
             lbInput.TabIndex = 1;
@@ -74,9 +82,9 @@
             // txbNumbers
             // 
             txbNumbers.Font = new Font("Microsoft JhengHei UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 136);
-            txbNumbers.Location = new Point(133, 97);
+            txbNumbers.Location = new Point(123, 39);
             txbNumbers.Name = "txbNumbers";
-            txbNumbers.Size = new Size(490, 38);
+            txbNumbers.Size = new Size(393, 38);
             txbNumbers.TabIndex = 2;
             // 
             // lbUserName
@@ -121,7 +129,7 @@
             // 
             lbSingle.AutoSize = true;
             lbSingle.Font = new Font("Microsoft JhengHei UI", 9.75F, FontStyle.Italic, GraphicsUnit.Point, 136);
-            lbSingle.Location = new Point(12, 70);
+            lbSingle.Location = new Point(2, 12);
             lbSingle.Name = "lbSingle";
             lbSingle.Size = new Size(76, 17);
             lbSingle.TabIndex = 7;
@@ -131,7 +139,7 @@
             // 
             lbMultiple.AutoSize = true;
             lbMultiple.Font = new Font("Microsoft JhengHei UI", 9.75F, FontStyle.Italic, GraphicsUnit.Point, 136);
-            lbMultiple.Location = new Point(12, 156);
+            lbMultiple.Location = new Point(2, 98);
             lbMultiple.Name = "lbMultiple";
             lbMultiple.Size = new Size(76, 17);
             lbMultiple.TabIndex = 8;
@@ -141,7 +149,7 @@
             // 
             laSet.AutoSize = true;
             laSet.Font = new Font("Microsoft JhengHei UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 136);
-            laSet.Location = new Point(46, 182);
+            laSet.Location = new Point(36, 124);
             laSet.Name = "laSet";
             laSet.Size = new Size(69, 35);
             laSet.TabIndex = 9;
@@ -151,7 +159,7 @@
             // 
             cbSet.Font = new Font("Microsoft JhengHei UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 136);
             cbSet.FormattingEnabled = true;
-            cbSet.Location = new Point(133, 179);
+            cbSet.Location = new Point(123, 121);
             cbSet.Name = "cbSet";
             cbSet.Size = new Size(59, 38);
             cbSet.TabIndex = 10;
@@ -160,7 +168,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Microsoft JhengHei UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 136);
-            label1.Location = new Point(222, 182);
+            label1.Location = new Point(212, 124);
             label1.Name = "label1";
             label1.Size = new Size(42, 35);
             label1.TabIndex = 11;
@@ -170,14 +178,14 @@
             // 
             cbSetNumber1.Font = new Font("Microsoft JhengHei UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 136);
             cbSetNumber1.FormattingEnabled = true;
-            cbSetNumber1.Location = new Point(282, 179);
+            cbSetNumber1.Location = new Point(272, 121);
             cbSetNumber1.Name = "cbSetNumber1";
             cbSetNumber1.Size = new Size(59, 38);
             cbSetNumber1.TabIndex = 12;
             // 
             // button1
             // 
-            button1.Location = new Point(649, 438);
+            button1.Location = new Point(548, 380);
             button1.Name = "button1";
             button1.Size = new Size(76, 38);
             button1.TabIndex = 13;
@@ -188,7 +196,7 @@
             // 
             comboBox1.Font = new Font("Microsoft JhengHei UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 136);
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(282, 231);
+            comboBox1.Location = new Point(272, 173);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(59, 38);
             comboBox1.TabIndex = 15;
@@ -197,7 +205,7 @@
             // 
             comboBox2.Font = new Font("Microsoft JhengHei UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 136);
             comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(282, 282);
+            comboBox2.Location = new Point(272, 224);
             comboBox2.Name = "comboBox2";
             comboBox2.Size = new Size(59, 38);
             comboBox2.TabIndex = 17;
@@ -206,7 +214,7 @@
             // 
             comboBox3.Font = new Font("Microsoft JhengHei UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 136);
             comboBox3.FormattingEnabled = true;
-            comboBox3.Location = new Point(282, 335);
+            comboBox3.Location = new Point(272, 277);
             comboBox3.Name = "comboBox3";
             comboBox3.Size = new Size(59, 38);
             comboBox3.TabIndex = 19;
@@ -215,7 +223,7 @@
             // 
             comboBox4.Font = new Font("Microsoft JhengHei UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 136);
             comboBox4.FormattingEnabled = true;
-            comboBox4.Location = new Point(282, 387);
+            comboBox4.Location = new Point(272, 329);
             comboBox4.Name = "comboBox4";
             comboBox4.Size = new Size(59, 38);
             comboBox4.TabIndex = 21;
@@ -224,7 +232,7 @@
             // 
             comboBox5.Font = new Font("Microsoft JhengHei UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 136);
             comboBox5.FormattingEnabled = true;
-            comboBox5.Location = new Point(282, 438);
+            comboBox5.Location = new Point(272, 380);
             comboBox5.Name = "comboBox5";
             comboBox5.Size = new Size(59, 38);
             comboBox5.TabIndex = 22;
@@ -235,33 +243,98 @@
             timer.Interval = 1;
             timer.Tick += timer_Tick;
             // 
+            // button2
+            // 
+            button2.Location = new Point(1156, 179);
+            button2.Name = "button2";
+            button2.Size = new Size(76, 38);
+            button2.TabIndex = 23;
+            button2.Text = "開獎";
+            button2.UseVisualStyleBackColor = true;
+            // 
+            // plBet
+            // 
+            plBet.BorderStyle = BorderStyle.FixedSingle;
+            plBet.Controls.Add(txbNumbers);
+            plBet.Controls.Add(btnBet);
+            plBet.Controls.Add(comboBox5);
+            plBet.Controls.Add(lbInput);
+            plBet.Controls.Add(comboBox4);
+            plBet.Controls.Add(lbSingle);
+            plBet.Controls.Add(comboBox3);
+            plBet.Controls.Add(lbMultiple);
+            plBet.Controls.Add(comboBox2);
+            plBet.Controls.Add(laSet);
+            plBet.Controls.Add(comboBox1);
+            plBet.Controls.Add(cbSet);
+            plBet.Controls.Add(button1);
+            plBet.Controls.Add(label1);
+            plBet.Controls.Add(cbSetNumber1);
+            plBet.Location = new Point(12, 67);
+            plBet.Name = "plBet";
+            plBet.Size = new Size(637, 466);
+            plBet.TabIndex = 25;
+            // 
+            // plWinner
+            // 
+            plWinner.BorderStyle = BorderStyle.FixedSingle;
+            plWinner.Controls.Add(lbWinnerNum);
+            plWinner.Controls.Add(btnWinnerNum);
+            plWinner.Controls.Add(lbWinnerDraw);
+            plWinner.Location = new Point(668, 67);
+            plWinner.Name = "plWinner";
+            plWinner.Size = new Size(452, 466);
+            plWinner.TabIndex = 26;
+            // 
+            // btnWinnerNum
+            // 
+            btnWinnerNum.Location = new Point(371, 36);
+            btnWinnerNum.Name = "btnWinnerNum";
+            btnWinnerNum.Size = new Size(76, 38);
+            btnWinnerNum.TabIndex = 23;
+            btnWinnerNum.Text = "開獎";
+            btnWinnerNum.UseVisualStyleBackColor = true;
+            btnWinnerNum.Click += btnWinnerNum_Click;
+            // 
+            // lbWinnerDraw
+            // 
+            lbWinnerDraw.AutoSize = true;
+            lbWinnerDraw.Font = new Font("Microsoft JhengHei UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 136);
+            lbWinnerDraw.Location = new Point(15, 39);
+            lbWinnerDraw.Name = "lbWinnerDraw";
+            lbWinnerDraw.Size = new Size(130, 35);
+            lbWinnerDraw.TabIndex = 6;
+            lbWinnerDraw.Text = "開獎期號:";
+            // 
+            // lbWinnerNum
+            // 
+            lbWinnerNum.AutoSize = true;
+            lbWinnerNum.Font = new Font("Microsoft JhengHei UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 136);
+            lbWinnerNum.Location = new Point(15, 98);
+            lbWinnerNum.Name = "lbWinnerNum";
+            lbWinnerNum.Size = new Size(130, 35);
+            lbWinnerNum.TabIndex = 24;
+            lbWinnerNum.Text = "開獎期號:";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1264, 681);
-            Controls.Add(comboBox5);
-            Controls.Add(comboBox4);
-            Controls.Add(comboBox3);
-            Controls.Add(comboBox2);
-            Controls.Add(comboBox1);
-            Controls.Add(button1);
-            Controls.Add(cbSetNumber1);
-            Controls.Add(label1);
-            Controls.Add(cbSet);
-            Controls.Add(laSet);
-            Controls.Add(lbMultiple);
-            Controls.Add(lbSingle);
+            Controls.Add(plWinner);
+            Controls.Add(plBet);
+            Controls.Add(button2);
             Controls.Add(lbdraw);
             Controls.Add(lbData);
             Controls.Add(txbUsename);
             Controls.Add(lbUserName);
-            Controls.Add(txbNumbers);
-            Controls.Add(lbInput);
-            Controls.Add(btnBet);
             Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;
+            plBet.ResumeLayout(false);
+            plBet.PerformLayout();
+            plWinner.ResumeLayout(false);
+            plWinner.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -288,5 +361,11 @@
         private ComboBox comboBox4;
         private ComboBox comboBox5;
         private System.Windows.Forms.Timer timer;
+        private Button button2;
+        private Panel plBet;
+        private Panel plWinner;
+        private Button btnWinnerNum;
+        private Label lbWinnerDraw;
+        private Label lbWinnerNum;
     }
 }

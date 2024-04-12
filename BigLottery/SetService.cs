@@ -10,7 +10,7 @@ namespace BigLottery
 {
     internal class SetService
     {
-        public static BetSlip CheckSet(string userName, string inputNumbers)
+        public static BetSlip? CheckSet(string userName, string inputNumbers)
         {
             inputNumbers = inputNumbers.Trim();
             List<int> numbers = new List<int>();

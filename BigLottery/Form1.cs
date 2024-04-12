@@ -21,7 +21,7 @@ namespace BigLottery
 
         private void button1_Click(object sender, EventArgs e)
         {
-            BetSlip betSlip = SetService.CheckSet(txbUsename.Text, txbNumbers.Text);
+            BetSlip? betSlip = SetService.CheckSet(txbUsename.Text, txbNumbers.Text);
             if (betSlip != null)
             {
                 saveToSql(betSlip);
@@ -38,12 +38,17 @@ namespace BigLottery
             {
                 string json = JsonConvert.SerializeObject(betSlip);
                 File.WriteAllText("betSlips.json", json);
-                MessageBox.Show($"下單成功!!\n單號:{betSlip.OrderNumber}");
+                MessageBox.Show($"下單成功!!\n\n單號:{betSlip.OrderNumber}");
             }
             catch
             {
                 MessageBox.Show("資料庫連線失敗");
             }
+        }
+
+        private void btnWinnerNum_Click(object sender, EventArgs e)
+        {
+            Random random = new Random();
         }
     }
 }

@@ -17,7 +17,7 @@ namespace BigLottery
             Regex regex = new Regex(@"^\d{2},\d{2},\d{2},\d{2},\d{2},\d{2}$");
 
             //檢測輸入空值
-            userName = string.IsNullOrEmpty(userName) ? "guess" : userName;
+            userName = string.IsNullOrEmpty(userName) ? "guest" : userName;
             if (string.IsNullOrEmpty(inputNumbers))
             {
                 MessageBox.Show("請輸入下注號碼");
@@ -40,7 +40,7 @@ namespace BigLottery
             }
 
             //檢測是否為1~49
-            if (numbers.Any(m =>  m <= 1 && m >= 49))
+            if (numbers.Any(m => m <= 1 && m >= 49))
             {
                 MessageBox.Show("請輸入1~49的數字");
                 return null;

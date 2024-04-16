@@ -59,12 +59,13 @@
             tabSwitch = new TabControl();
             tabPage1 = new TabPage();
             tabPage2 = new TabPage();
+            lbTotalBet = new Label();
+            cbSearch = new ComboBox();
+            btnDataViewClear = new Button();
+            btnSearch = new Button();
             dgvPrizeView = new DataGridView();
-            textBox2 = new TextBox();
-            label3 = new Label();
-            textBox1 = new TextBox();
-            label2 = new Label();
-            comboBox1 = new ComboBox();
+            txbSearch = new TextBox();
+            cbDrawSearch = new ComboBox();
             label1 = new Label();
             plBet.SuspendLayout();
             plWinner.SuspendLayout();
@@ -98,6 +99,7 @@
             // 
             txbNumbers.Font = new Font("Microsoft JhengHei UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 136);
             txbNumbers.Location = new Point(123, 39);
+            txbNumbers.MaxLength = 17;
             txbNumbers.Name = "txbNumbers";
             txbNumbers.PlaceholderText = "01,02,03,04,05,06";
             txbNumbers.Size = new Size(393, 38);
@@ -117,6 +119,7 @@
             // 
             txbUsename.Font = new Font("Microsoft JhengHei UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 136);
             txbUsename.Location = new Point(99, 9);
+            txbUsename.MaxLength = 16;
             txbUsename.Name = "txbUsename";
             txbUsename.PlaceholderText = "guest";
             txbUsename.Size = new Size(220, 38);
@@ -177,7 +180,10 @@
             cbSet.DropDownStyle = ComboBoxStyle.DropDownList;
             cbSet.Font = new Font("Microsoft JhengHei UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 136);
             cbSet.FormattingEnabled = true;
+            cbSet.IntegralHeight = false;
+            cbSet.ItemHeight = 30;
             cbSet.Location = new Point(123, 121);
+            cbSet.MaxDropDownItems = 15;
             cbSet.Name = "cbSet";
             cbSet.Size = new Size(59, 38);
             cbSet.TabIndex = 10;
@@ -199,7 +205,9 @@
             cbSetNumber1.Enabled = false;
             cbSetNumber1.Font = new Font("Microsoft JhengHei UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 136);
             cbSetNumber1.FormattingEnabled = true;
+            cbSetNumber1.IntegralHeight = false;
             cbSetNumber1.Location = new Point(272, 121);
+            cbSetNumber1.MaxDropDownItems = 15;
             cbSetNumber1.Name = "cbSetNumber1";
             cbSetNumber1.Size = new Size(59, 38);
             cbSetNumber1.TabIndex = 12;
@@ -221,7 +229,9 @@
             cbSetNumber4.Enabled = false;
             cbSetNumber4.Font = new Font("Microsoft JhengHei UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 136);
             cbSetNumber4.FormattingEnabled = true;
+            cbSetNumber4.IntegralHeight = false;
             cbSetNumber4.Location = new Point(272, 298);
+            cbSetNumber4.MaxDropDownItems = 15;
             cbSetNumber4.Name = "cbSetNumber4";
             cbSetNumber4.Size = new Size(59, 38);
             cbSetNumber4.TabIndex = 15;
@@ -233,7 +243,9 @@
             cbSetNumber2.Enabled = false;
             cbSetNumber2.Font = new Font("Microsoft JhengHei UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 136);
             cbSetNumber2.FormattingEnabled = true;
+            cbSetNumber2.IntegralHeight = false;
             cbSetNumber2.Location = new Point(272, 178);
+            cbSetNumber2.MaxDropDownItems = 15;
             cbSetNumber2.Name = "cbSetNumber2";
             cbSetNumber2.Size = new Size(59, 38);
             cbSetNumber2.TabIndex = 17;
@@ -245,7 +257,9 @@
             cbSetNumber3.Enabled = false;
             cbSetNumber3.Font = new Font("Microsoft JhengHei UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 136);
             cbSetNumber3.FormattingEnabled = true;
+            cbSetNumber3.IntegralHeight = false;
             cbSetNumber3.Location = new Point(272, 241);
+            cbSetNumber3.MaxDropDownItems = 15;
             cbSetNumber3.Name = "cbSetNumber3";
             cbSetNumber3.Size = new Size(59, 38);
             cbSetNumber3.TabIndex = 19;
@@ -257,7 +271,9 @@
             cbSetNumber5.Enabled = false;
             cbSetNumber5.Font = new Font("Microsoft JhengHei UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 136);
             cbSetNumber5.FormattingEnabled = true;
+            cbSetNumber5.IntegralHeight = false;
             cbSetNumber5.Location = new Point(272, 353);
+            cbSetNumber5.MaxDropDownItems = 15;
             cbSetNumber5.Name = "cbSetNumber5";
             cbSetNumber5.Size = new Size(59, 38);
             cbSetNumber5.TabIndex = 21;
@@ -329,6 +345,7 @@
             // 
             txbPrize.Font = new Font("Microsoft JhengHei UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 136);
             txbPrize.Location = new Point(102, 237);
+            txbPrize.MaxLength = 17;
             txbPrize.Name = "txbPrize";
             txbPrize.PlaceholderText = "01,02,03,04,05,06";
             txbPrize.Size = new Size(336, 38);
@@ -387,12 +404,13 @@
             // 
             // tabPage2
             // 
+            tabPage2.Controls.Add(lbTotalBet);
+            tabPage2.Controls.Add(cbSearch);
+            tabPage2.Controls.Add(btnDataViewClear);
+            tabPage2.Controls.Add(btnSearch);
             tabPage2.Controls.Add(dgvPrizeView);
-            tabPage2.Controls.Add(textBox2);
-            tabPage2.Controls.Add(label3);
-            tabPage2.Controls.Add(textBox1);
-            tabPage2.Controls.Add(label2);
-            tabPage2.Controls.Add(comboBox1);
+            tabPage2.Controls.Add(txbSearch);
+            tabPage2.Controls.Add(cbDrawSearch);
             tabPage2.Controls.Add(label1);
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
@@ -402,59 +420,81 @@
             tabPage2.Text = "中獎查詢";
             tabPage2.UseVisualStyleBackColor = true;
             // 
+            // lbTotalBet
+            // 
+            lbTotalBet.AutoSize = true;
+            lbTotalBet.Font = new Font("Microsoft JhengHei UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 136);
+            lbTotalBet.Location = new Point(307, 526);
+            lbTotalBet.Name = "lbTotalBet";
+            lbTotalBet.Size = new Size(157, 35);
+            lbTotalBet.TabIndex = 31;
+            lbTotalBet.Text = "總投注單數:";
+            // 
+            // cbSearch
+            // 
+            cbSearch.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbSearch.Font = new Font("Microsoft JhengHei UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 136);
+            cbSearch.FormattingEnabled = true;
+            cbSearch.IntegralHeight = false;
+            cbSearch.ItemHeight = 30;
+            cbSearch.Items.AddRange(new object[] { "名稱:", "單號:" });
+            cbSearch.Location = new Point(15, 82);
+            cbSearch.MaxDropDownItems = 15;
+            cbSearch.Name = "cbSearch";
+            cbSearch.Size = new Size(72, 38);
+            cbSearch.TabIndex = 30;
+            // 
+            // btnDataViewClear
+            // 
+            btnDataViewClear.Location = new Point(507, 82);
+            btnDataViewClear.Name = "btnDataViewClear";
+            btnDataViewClear.Size = new Size(76, 38);
+            btnDataViewClear.TabIndex = 29;
+            btnDataViewClear.Text = "清空";
+            btnDataViewClear.UseVisualStyleBackColor = true;
+            btnDataViewClear.Click += btnDataViewClear_Click;
+            // 
+            // btnSearch
+            // 
+            btnSearch.Location = new Point(507, 35);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new Size(76, 38);
+            btnSearch.TabIndex = 28;
+            btnSearch.Text = "搜尋";
+            btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
+            // 
             // dgvPrizeView
             // 
+            dgvPrizeView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dgvPrizeView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvPrizeView.Location = new Point(15, 131);
             dgvPrizeView.Name = "dgvPrizeView";
-            dgvPrizeView.Size = new Size(568, 440);
+            dgvPrizeView.Size = new Size(568, 392);
             dgvPrizeView.TabIndex = 16;
             // 
-            // textBox2
+            // txbSearch
             // 
-            textBox2.Font = new Font("Microsoft JhengHei UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 136);
-            textBox2.Location = new Point(401, 79);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(182, 38);
-            textBox2.TabIndex = 15;
+            txbSearch.Font = new Font("Microsoft JhengHei UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 136);
+            txbSearch.Location = new Point(93, 82);
+            txbSearch.MaxLength = 16;
+            txbSearch.Name = "txbSearch";
+            txbSearch.Size = new Size(396, 38);
+            txbSearch.TabIndex = 15;
             // 
-            // label3
+            // cbDrawSearch
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Microsoft JhengHei UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 136);
-            label3.Location = new Point(319, 82);
-            label3.Name = "label3";
-            label3.Size = new Size(76, 35);
-            label3.TabIndex = 14;
-            label3.Text = "名稱:";
-            // 
-            // textBox1
-            // 
-            textBox1.Font = new Font("Microsoft JhengHei UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 136);
-            textBox1.Location = new Point(93, 79);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(220, 38);
-            textBox1.TabIndex = 13;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Microsoft JhengHei UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 136);
-            label2.Location = new Point(11, 82);
-            label2.Name = "label2";
-            label2.Size = new Size(76, 35);
-            label2.TabIndex = 12;
-            label2.Text = "單號:";
-            // 
-            // comboBox1
-            // 
-            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox1.Font = new Font("Microsoft JhengHei UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 136);
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(93, 35);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(396, 38);
-            comboBox1.TabIndex = 11;
+            cbDrawSearch.AllowDrop = true;
+            cbDrawSearch.Font = new Font("Microsoft JhengHei UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 136);
+            cbDrawSearch.FormattingEnabled = true;
+            cbDrawSearch.IntegralHeight = false;
+            cbDrawSearch.Location = new Point(93, 35);
+            cbDrawSearch.MaxLength = 10;
+            cbDrawSearch.Name = "cbDrawSearch";
+            cbDrawSearch.Size = new Size(396, 38);
+            cbDrawSearch.TabIndex = 11;
+            cbDrawSearch.SelectedIndexChanged += cbDrawSearch_SelectedIndexChanged;
+            cbDrawSearch.KeyPress += cbDrawSearch_KeyPress;
             // 
             // label1
             // 
@@ -525,12 +565,13 @@
         private TabControl tabSwitch;
         private TabPage tabPage1;
         private TabPage tabPage2;
-        private ComboBox comboBox1;
+        private ComboBox cbDrawSearch;
         private Label label1;
-        private TextBox textBox2;
-        private Label label3;
-        private TextBox textBox1;
-        private Label label2;
+        private TextBox txbSearch;
         private DataGridView dgvPrizeView;
+        private Button btnSearch;
+        private Button btnDataViewClear;
+        private ComboBox cbSearch;
+        private Label lbTotalBet;
     }
 }

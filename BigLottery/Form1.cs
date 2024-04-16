@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using System.Data;
 using System.ComponentModel;
+using System.Drawing;
 
 namespace BigLottery
 {
@@ -113,11 +114,23 @@ namespace BigLottery
                 }
             }
 
+            //讀取過往獎號至cbDrawSearch
+            List<int> draw = _betSlips.Select(m => m.Draw).Distinct().ToList();
+            foreach (var i in draw)
+            {
+                cbDrawSearch.Items.Add(i);
+            }
+
             //開出上一期的獎項
             multPrize();
 
+
             //更新中獎圖表
-            selectPrizeSlip();
+            selectPrizeSlip(_betSlips);
+            lbTotalBet.Text = $"總投注單數:{_betSlips.Count}";
+
+            //設定cb選擇
+            cbSearch.SelectedIndex = 0;
         }
         private void InitializeDataGridView()
         {
@@ -137,7 +150,7 @@ namespace BigLottery
             TypeDescriptor.AddAttributes(typeof(List<int>), new TypeConverterAttribute(typeof(IntListConverter)));
 
             DataGridViewTextBoxColumn orderNumberColumn = new DataGridViewTextBoxColumn();
-            orderNumberColumn.HeaderText = "OrderNumber";
+            orderNumberColumn.HeaderText = "OrderNim";
             orderNumberColumn.DataPropertyName = "OrderNumber";
             dgvPrizeView.Columns.Add(orderNumberColumn);
 
@@ -154,9 +167,9 @@ namespace BigLottery
             dgvPrizeView.DataSource = _betSlips;
         }
 
-        private void selectPrizeSlip()
+        private void selectPrizeSlip(List<BetSlip> betSlips)
         {
-            _prizeSlips = _betSlips;
+            _prizeSlips = betSlips;
 
             dgvPrizeView.DataSource = null;
             dgvPrizeView.DataSource = _prizeSlips;
@@ -167,7 +180,8 @@ namespace BigLottery
             if (betSlip != null)
             {
                 saveToJosn(betSlip);
-                MessageBox.Show($"下單成功!!\n\n單號:{betSlip.OrderNumber}");
+                string messageNum = string.Join(",", betSlip.Numbers);
+                MessageBox.Show($"下單成功!!\n\n單號:{betSlip.OrderNumber}\n投注號碼:{messageNum}");
             }
         }
         private void btnPrize_Click(object sender, EventArgs e)
@@ -182,7 +196,7 @@ namespace BigLottery
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            //lbData.Text = DateTime.Now.ToString("yyyy年MM月dd日H:mm");
+            lbData.Text = DateTime.Now.ToString("yyyy年MM月dd日H:mm");
         }
 
         private void saveToJosn(BetSlip betSlip)
@@ -215,6 +229,22 @@ namespace BigLottery
             }
         }
 
+        //系統兌獎後自動存成json
+        private void saveToJson()
+        {
+            try
+            {
+                string json = JsonConvert.SerializeObject(_winningSlips, Formatting.Indented);
+                File.WriteAllText("WinningSlip.json", json);
+                json = JsonConvert.SerializeObject(_betSlips, Formatting.Indented);
+                File.WriteAllText("BetSlips.json", json);
+            }
+            catch
+            {
+                MessageBox.Show("資料庫連線失敗");
+            }
+        }
+
         private string singlePrize(List<int> betNumbers, WinningSlip winnerNumber)
         {
             bool hasSpecialNumber = false;
@@ -233,6 +263,20 @@ namespace BigLottery
                 {
                     betSlip.Prize = singlePrize(betSlip.Numbers, Newest);
                 }
+            saveToJson();
+        }
+        //test
+        private void testPrize()
+        {
+            int testDraw = NewWinnerDraw - 1;
+            List<BetSlip> PrizebetSlips = _betSlips.Where(m => m.Draw == testDraw).ToList();
+            var testSlip = _winningSlips.FirstOrDefault(m => m.Draw == testDraw);
+            if (testSlip != null)
+                foreach (BetSlip betSlip in PrizebetSlips)
+                {
+                    betSlip.Prize = singlePrize(betSlip.Numbers, testSlip);
+                }
+            saveToJson();
         }
 
         private void cbSet_SelectionChangeCommitted(object sender, EventArgs e)
@@ -290,6 +334,76 @@ namespace BigLottery
             {
                 MessageBox.Show($"資料庫連線失敗\n{ex}");
             }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(cbDrawSearch.Text))
+            {
+                bool hasDraw = _betSlips.Any(m => m.Draw == int.Parse(cbDrawSearch.Text));
+                if (!hasDraw)
+                {
+                    MessageBox.Show("請輸入正確期號");
+                    return;
+                }
+                _prizeSlips = _betSlips.Where(m => m.Draw == int.Parse(cbDrawSearch.Text)).ToList();
+            }
+            else { _prizeSlips = _betSlips; }
+            if (cbSearch.SelectedIndex == 0 && !string.IsNullOrEmpty(txbSearch.Text))
+            {
+                if (txbSearch.Text == "guest")
+                {
+                    MessageBox.Show("guest請使用單號查詢");
+                    return;
+                }
+                _prizeSlips = _prizeSlips.Where(m => m.UserName == txbSearch.Text).ToList();
+                if (_prizeSlips.Count == 0)
+                {
+                    MessageBox.Show("查無有此名稱的投注單");
+                }
+            }
+            if (cbSearch.SelectedIndex == 1 && !string.IsNullOrEmpty(txbSearch.Text))
+            {
+                _prizeSlips = _prizeSlips.Where(m => m.OrderNumber == int.Parse(txbSearch.Text)).ToList();
+                if (_prizeSlips.Count == 0)
+                {
+                    MessageBox.Show("查無此投注單");
+                }
+            }
+            selectPrizeSlip(_prizeSlips);
+            lbTotalBet.Text = $"總投注單數:{_prizeSlips.Count}";
+        }
+
+        private void cbDrawSearch_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void btnDataViewClear_Click(object sender, EventArgs e)
+        {
+            cbDrawSearch.SelectedIndex = -1;
+            cbDrawSearch.Text = "";
+            txbSearch.Text = "";
+            cbSearch.SelectedIndex = 0;
+            selectPrizeSlip(_betSlips);
+            lbTotalBet.Text = $"總投注單數:{_betSlips.Count}";
+        }
+
+        private void cbDrawSearch_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(cbDrawSearch.Text)) return;
+            bool hasDraw = _betSlips.Any(m => m.Draw == int.Parse(cbDrawSearch.Text));
+            if (!hasDraw)
+            {
+                MessageBox.Show("請輸入正確期號");
+                return;
+            }
+            _prizeSlips = _betSlips.Where(m => m.Draw == int.Parse(cbDrawSearch.Text)).ToList();
+            selectPrizeSlip(_prizeSlips);
+            lbTotalBet.Text = $"總投注單數:{_prizeSlips.Count()}";
         }
     }
 }
